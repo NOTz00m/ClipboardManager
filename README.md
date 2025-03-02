@@ -33,7 +33,7 @@ On first run, a startup wizard will guide you through the initial setup (encrypt
 
 To bundle the app into a standalone executable using PyInstaller, run:
 ```sh
-pyinstaller --onefile --noconsole --add-data "clipboard.png:." --add-data "JetBrainsMono-Regular.ttf:." --hidden-import PySide6 --hidden-import cryptography --hidden-import cryptography.fernet clipboard_manager.py
+pyinstaller --onefile --windowed --icon=clipboard.png --hidden-import PySide6 --hidden-import cryptography --hidden-import cryptography.fernet --add-data "JetBrainsMono-Regular.ttf;." --add-data "clipboard.png;." clipboard_manager.py
 ```
 Make sure to include the following files in your build:
 - clipboard.png (for the tray icon)
