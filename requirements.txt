@@ -1,0 +1,3 @@
+PySide6
+cryptography
+cryptography.fernet
