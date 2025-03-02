@@ -38,6 +38,7 @@ pyinstaller --onefile --noconsole --add-data "clipboard.png:." --add-data "JetBr
 Make sure to include the following files in your build:
 - clipboard.png (for the tray icon)
 - JetBrainsMono-Regular.ttf (the font file)
+
 Alternatively, you can use cx_Freeze. Refer to its documentation for details on including additional data files.
 
 ## Contributing
