@@ -41,6 +41,19 @@ Make sure to include the following files in your build:
 
 Alternatively, you can use cx_Freeze. Refer to its documentation for details on including additional data files.
 
+## Future Plans
+
+- Cloud Sync: Add support for syncing clipboard history across devices.
+- Custom Fonts: Allow users to select and load custom fonts.
+- Enhanced Search: Add advanced search filters (e.g., by date, content type).
+
+## Known Issues
+
+- Font Fallback: If the JetBrains Mono font is not found, the application falls back to a system monospace font.
+- Fix QOL issues with checkboxes not being ticked/enabled properly
+
 ## Contributing
 
 Contributions are welcome! Please fork the repository and submit pull requests for improvements or bug fixes.
+
+Enjoy using Clipboard Manager! If you encounter any issues or have suggestions, feel free to reach out.
