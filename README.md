@@ -1,6 +1,6 @@
 # Clipboard Manager
 
-A lightweight, cross-platform, one-file clipboard manager built with Python and PySide6. It automatically saves your clipboard history, encrypts sensitive data, and supports advanced search with wildcards—all in a modern, developer-friendly interface. Designed for programmers who frequently copy/paste code snippets and just need quick access to their clipboard history.
+A lightweight, cross-platform, one-file clipboard manager built with Python and PySide6. It automatically saves your clipboard history, supports encryption (to be improved), and supports advanced search with wildcards—all in a modern, developer-friendly interface. Designed for programmers who frequently copy/paste code snippets and just need quick access to their clipboard history.
 
 ## Features
 - Automatically stores clipboard history in a SQLite database.
