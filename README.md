@@ -31,14 +31,14 @@ On first run, a startup wizard will guide you through the initial setup (encrypt
 
 ## Building as an Executable
 
-To bundle the app into a standalone executable using PyInstaller, run:
+Windows: To bundle the app into a standalone executable using PyInstaller, run:
 ```sh
-pyinstaller --onefile --windowed --icon=clipboard.png --hidden-import PySide6 --hidden-import cryptography --hidden-import cryptography.fernet --add-data "JetBrainsMono-Regular.ttf;." --add-data "clipboard.png;." clipboard_manager.py
+pyinstaller --onefile --windowed --icon=clipboard.png --hidden-import PySide6 --hidden-import cryptography --hidden-import cryptography.fernet --add-data "pin.png;." --add-data "pin_active.png;." --add-data "star.png;." --add-data "JetBrainsMono-Regular.ttf;." --add-data "star_active.png;." --add-data "trash.png;." --add-data "clipboard.png;." clipboard_manager.py
 ```
-Make sure to include the following files in your build:
-- clipboard.png (for the tray icon)
-- JetBrainsMono-Regular.ttf (the font file)
-
+Mac:
+```sh
+pyinstaller --onefile --windowed --icon=clipboard.png --hidden-import PySide6 --hidden-import cryptography --hidden-import cryptography.fernet --add-data "pin.png:." --add-data "pin_active.png:." --add-data "star.png:." --add-data "JetBrainsMono-Regular.ttf:." --add-data "star_active.png:." --add-data "trash.png:." --add-data "clipboard.png:." clipboard_manager.py
+```
 Alternatively, you can use cx_Freeze. Refer to its documentation for details on including additional data files.
 
 ## Future Plans
