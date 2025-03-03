@@ -52,6 +52,4 @@ Alternatively, you can use cx_Freeze. Refer to its documentation for details on 
 
 ## Contributing
 
-Contributions are welcome! Please fork the repository and submit pull requests for improvements or bug fixes.
-
-Enjoy using Clipboard Manager! If you encounter any issues or have suggestions, feel free to reach out.
+Contributions are welcome although they might be difficult! Please fork the repository and submit pull requests for improvements or bug fixes.
