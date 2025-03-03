@@ -44,13 +44,10 @@ Alternatively, you can use cx_Freeze. Refer to its documentation for details on 
 ## Future Plans
 
 - Cloud Sync: Add support for syncing clipboard history across devices.
-- Custom Fonts: Allow users to select and load custom fonts.
-- Enhanced Search: Add advanced search filters (e.g., by date, content type).
 
 ## Known Issues
 
 - Font Fallback: If the JetBrains Mono font is not found, the application falls back to a system monospace font.
-- Fix QOL issues with checkboxes not being ticked/enabled properly + Windows 11 Overriding theme colours
 
 ## Contributing
 
