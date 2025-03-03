@@ -48,6 +48,7 @@ Alternatively, you can use cx_Freeze. Refer to its documentation for details on 
 ## Known Issues
 
 - Font Fallback: If the JetBrains Mono font is not found, the application falls back to a system monospace font.
+- Dark Theme needs significant improvement
 
 ## Contributing
 
