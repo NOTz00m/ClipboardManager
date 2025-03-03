@@ -5,7 +5,7 @@ A lightweight, cross-platform, one-file clipboard manager built with Python and 
 ## Features
 - Automatically stores clipboard history in a SQLite database.
 - Supports encryption with an optional personal key/password.
-- Advanced search functionality with wildcard support (e.g. use "[code]" to filter for code snippets).
+- Advanced search functionality with wildcard support (e.g. use "type:code" to filter for code snippets).
 - Customizable dark/light themes.
 - Cross-platform compatibility (Windows, macOS, Linux).
 - Easy to build and bundle as a standalone executable.
