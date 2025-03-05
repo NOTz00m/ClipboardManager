@@ -1,5 +1,6 @@
 # Clipboard Manager
 
+![Python Version](https://img.shields.io/badge/python-3.6%2B-blue?logo=python&logoColor=white&style=for-the-badge)
 ![License](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge)
 ![Code Size](https://img.shields.io/github/languages/code-size/NOTz00m/ClipboardManager?style=for-the-badge)
 
