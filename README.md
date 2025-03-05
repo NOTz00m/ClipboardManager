@@ -1,4 +1,4 @@
-# Clipboard Manager
+<div align="center"> # Clipboard Manager </div>
 
 <div align="center">
   <img src="https://img.shields.io/badge/python-3.6%2B-blue?logo=python&logoColor=white&style=for-the-badge" alt="Python Version">
