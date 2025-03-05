@@ -1,8 +1,10 @@
 # Clipboard Manager
 
-![Python Version](https://img.shields.io/badge/python-3.6%2B-blue?logo=python&logoColor=white&style=for-the-badge)
-![License](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge)
-![Code Size](https://img.shields.io/github/languages/code-size/NOTz00m/ClipboardManager?style=for-the-badge)
+<div align="center">
+  <img src="https://img.shields.io/badge/python-3.6%2B-blue?logo=python&logoColor=white&style=for-the-badge" alt="Python Version">
+  <img src="https://img.shields.io/badge/license-MIT-blue?style=for-the-badge" alt="License">
+  <img src="https://img.shields.io/github/languages/code-size/yourusername/your-repo?style=for-the-badge" alt="Code Size">
+</div>
 
 A lightweight, cross-platform, one-file clipboard manager built with Python and PySide6. It automatically saves your clipboard history, supports encryption (to be improved), and supports advanced search with wildcards—all in a modern, developer-friendly interface. Designed for programmers who frequently copy/paste code snippets and just need quick access to their clipboard history.
 
