@@ -1,7 +1,7 @@
 <div align="center">
   <h1>Clipboard Manager</h1>
 </div>
-
+<br>
 <div align="center">
   <img src="https://img.shields.io/badge/python-3.6%2B-blue?logo=python&logoColor=white&style=for-the-badge" alt="Python Version">
   <img src="https://img.shields.io/badge/license-MIT-blue?style=for-the-badge" alt="License">
