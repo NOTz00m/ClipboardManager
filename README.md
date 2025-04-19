@@ -8,57 +8,70 @@
   <img src="https://img.shields.io/github/languages/code-size/NOTz00m/ClipboardManager?style=for-the-badge" alt="Code Size">
 </div>
 <br>
-A lightweight, cross-platform, one-file clipboard manager built with Python and PySide6. It automatically saves your clipboard history, supports encryption (to be improved), and supports advanced search with wildcards—all in a modern, developer-friendly interface. Designed for programmers who frequently copy/paste code snippets and just need quick access to their clipboard history.
+A modern, feature-rich clipboard manager built with Python and PySide6, designed to make your copy-paste workflow smoother with smart code detection, and powerful search capabilities. Perfect for developers who want quick access to their clipboard history with style!
 
-## Features
-- Automatically stores clipboard history in a SQLite database.
-- Supports encryption with an optional personal key/password.
-- Advanced search functionality with wildcard support (e.g. use "type:code" to filter for code snippets).
-- Customizable dark/light themes.
-- Cross-platform compatibility (Windows, macOS, Linux).
-- Easy to build and bundle as a standalone executable.
+## ✨ Features
+- 🎨 Modern UI with dark and light mode
+- 🔍 Smart code detection with advanced search filters
+- ☁️ Google Drive sync for cross-device access
+- 🔒 Built-in encryption for data security
+- 🔌 Extensible plugin system
+- 🖥️ System tray integration with smart notifications
 
-## Requirements
-- Python 3.6+
-- PySide6
-- cryptography
+## 📋 Requirements
+```
+python >= 3.6
+PySide6
+cryptography
+google-auth-oauthlib
+google-api-python-client
+```
 
-## Installation
+## 🚀 Installation
 ```sh
 git clone https://github.com/NOTz00m/ClipboardManager.git
-cd clipboard-manager
+cd ClipboardManager
 pip install -r requirements.txt
 ```
 
-## Usage
+## 🎮 Usage
 ```sh
-python clipboard_manager.py
+python main.py
+```
+On first launch, our friendly setup wizard will help you configure everything just the way you like it!
+
+## 🔨 Building the Executable
+
+### Windows
+```sh
+# Create a single executable with all features
+pyinstaller ClipboardManager.spec
 ```
 
-On first run, a startup wizard will guide you through the initial setup (encryption options, theme selection, etc.).
-
-## Building as an Executable
-
-Windows: To bundle the app into a standalone executable using PyInstaller, run:
+### macOS
 ```sh
-pyinstaller --onefile --windowed --icon=clipboard.png --hidden-import PySide6 --hidden-import cryptography --hidden-import cryptography.fernet --add-data "pin.png;." --add-data "pin_active.png;." --add-data "star.png;." --add-data "JetBrainsMono-Regular.ttf;." --add-data "star_active.png;." --add-data "trash.png;." --add-data "clipboard.png;." clipboard_manager.py
+# For macOS, use ':' instead of ';' in the --add-data paths
+pyinstaller --name "ClipboardManager" --windowed --icon=clipboard.png --add-data "JetBrainsMono-Regular.ttf:." --add-data "clipboard.png:." --add-data "pin.png:." --add-data "pin_active.png:." --add-data "star.png:." --add-data "star_active.png:." --add-data "trash.png:." --hidden-import PySide6 --hidden-import cryptography --hidden-import cryptography.fernet --hidden-import google.auth.transport.requests --hidden-import google.oauth2.credentials --hidden-import google_auth_oauthlib.flow --hidden-import googleapiclient.discovery main.py
 ```
-Mac:
+
+### Linux
 ```sh
-pyinstaller --onefile --windowed --icon=clipboard.png --hidden-import PySide6 --hidden-import cryptography --hidden-import cryptography.fernet --add-data "pin.png:." --add-data "pin_active.png:." --add-data "star.png:." --add-data "JetBrainsMono-Regular.ttf:." --add-data "star_active.png:." --add-data "trash.png:." --add-data "clipboard.png:." clipboard_manager.py
+# For Linux, use ':' instead of ';' in the --add-data paths (same as macOS)
+pyinstaller ClipboardManager.spec
 ```
-Alternatively, you can use cx_Freeze. Refer to its documentation for details on including additional data files.
 
-## Future Plans
+The executable will be created in the `dist` directory. For the best experience, we recommend using the spec file method as it includes all necessary dependencies and resources.
 
-- Cloud Sync: Add support for syncing clipboard history across devices.
+## 🎯 Future Plans
+- 📱 Mobile companion app
+- 🔄 Real-time sync across devices
+- 🎨 Custom themes support
+- 🎮 Custom keyboard shortcuts configuration
+- 📊 Usage statistics and insights
+- 🔒 End-to-end encryption for cloud sync
 
-## Known Issues
+## 🐛 Known Issues
+None at the moment! The recent update fixed the dark theme and scrollbar issues. If you find any bugs, please report them in the Issues section.
 
-- If the JetBrains Mono font is not found, the application falls back to a system monospace font.
-- Dark Theme needs significant improvement.
-- Currently working on getting false positive detections removed however it will take some time.
-
-## Contributing
-
-Contributions are welcome although they might be difficult! Please fork the repository and submit pull requests for improvements or bug fixes.
+## 🤝 Contributing
+Love Clipboard Manager? We'd love your help! Whether it's reporting bugs, suggesting features, or contributing code - all contributions are welcome. Check out our issues page to get started!
