@@ -10,15 +10,15 @@
 <br>
 A modern, feature-rich clipboard manager built with Python and PySide6, designed to make your copy-paste workflow smoother with smart code detection, and powerful search capabilities. Perfect for developers who want quick access to their clipboard history with style!
 
-## ✨ Features
-- 🎨 Modern UI with dark and light mode
-- 🔍 Smart code detection with advanced search filters
-- ☁️ Google Drive sync for cross-device access
-- 🔒 Built-in encryption for data security
-- 🔌 Extensible plugin system
-- 🖥️ System tray integration with smart notifications
+## Features
+- Modern UI with dark and light mode
+- Smart code detection with advanced search filters
+- Google Drive sync for cross-device access
+- Built-in encryption for data security
+- Extensible plugin system
+- System tray integration with smart notifications
 
-## 📋 Requirements
+## Requirements
 ```
 python >= 3.6
 PySide6
@@ -27,20 +27,20 @@ google-auth-oauthlib
 google-api-python-client
 ```
 
-## 🚀 Installation
+## Installation
 ```sh
 git clone https://github.com/NOTz00m/ClipboardManager.git
 cd ClipboardManager
 pip install -r requirements.txt
 ```
 
-## 🎮 Usage
+## Usage
 ```sh
 python main.py
 ```
 On first launch, our friendly setup wizard will help you configure everything just the way you like it!
 
-## 🔨 Building the Executable
+## Building the Executable
 
 ### Windows
 ```sh
@@ -62,16 +62,16 @@ pyinstaller ClipboardManager.spec
 
 The executable will be created in the `dist` directory. For the best experience, we recommend using the spec file method as it includes all necessary dependencies and resources.
 
-## 🎯 Future Plans
-- 📱 Mobile companion app
-- 🔄 Real-time sync across devices
-- 🎨 Custom themes support
-- 🎮 Custom keyboard shortcuts configuration
-- 📊 Usage statistics and insights
-- 🔒 End-to-end encryption for cloud sync
+## Future Plans
+- Mobile companion app
+- Real-time sync across devices
+- Custom themes support
+- Custom keyboard shortcuts configuration
+- Usage statistics and insights
+- End-to-end encryption for cloud sync
 
-## 🐛 Known Issues
+## Known Issues
 None at the moment! The recent update fixed the dark theme and scrollbar issues. If you find any bugs, please report them in the Issues section.
 
-## 🤝 Contributing
+## Contributing
 Love Clipboard Manager? We'd love your help! Whether it's reporting bugs, suggesting features, or contributing code - all contributions are welcome. Check out our issues page to get started!
