@@ -12,11 +12,7 @@ SYNC_FILENAME = 'clipboard_history.json'
 
 
 def authenticate_gdrive(token_path, credentials_path='credentials.json'):
-    """
-    Authenticate with Google Drive and return a service object.
-    token_path: where to store the user's OAuth token (pickle file)
-    credentials_path: path to the OAuth client credentials JSON
-    """
+    # oauth login for gdrive sync
     creds = None
     if os.path.exists(token_path):
         with open(token_path, 'rb') as token:
@@ -53,7 +49,6 @@ def get_or_create_app_folder(service):
     items = results.get('files', [])
     if items:
         return items[0]['id']
-    # create folder
     file_metadata = {
         'name': APP_FOLDER_NAME,
         'mimeType': 'application/vnd.google-apps.folder'
@@ -63,17 +58,14 @@ def get_or_create_app_folder(service):
 
 
 def upload_file(local_path, service, folder_id):
-    # check if file exists
     query = f"name='{SYNC_FILENAME}' and '{folder_id}' in parents and trashed=false"
     results = service.files().list(q=query, spaces='drive', fields='files(id, name)').execute()
     items = results.get('files', [])
     media = MediaFileUpload(local_path, resumable=True)
     if items:
-        # update existing file
         file_id = items[0]['id']
         service.files().update(fileId=file_id, media_body=media).execute()
     else:
-        # create new file
         file_metadata = {'name': SYNC_FILENAME, 'parents': [folder_id]}
         service.files().create(body=file_metadata, media_body=media, fields='id').execute()
 
@@ -107,4 +99,4 @@ def delete_file(service, folder_id):
 
 def unlink_gdrive_token(token_path):
     if os.path.exists(token_path):
-        os.remove(token_path) 
+        os.remove(token_path)

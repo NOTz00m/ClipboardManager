@@ -1,77 +1,87 @@
 <div align="center">
   <h1>Clipboard Manager</h1>
+  <p>A fast, local-first, encrypted clipboard history manager built with PySide6 & Fluent Design.</p>
+
+  <img src="https://img.shields.io/badge/python-3.11%2B-blue?logo=python&logoColor=white&style=for-the-badge" alt="Python Version">
+  <img src="https://img.shields.io/badge/license-MIT--Non--AI-blue?style=for-the-badge" alt="License">
+  <img src="https://img.shields.io/badge/platform-Windows_10%2F11-0078D4?logo=windows&logoColor=white&style=for-the-badge" alt="Platform">
 </div>
+
 <br>
-<div align="center">
-  <img src="https://img.shields.io/badge/python-3.6%2B-blue?logo=python&logoColor=white&style=for-the-badge" alt="Python Version">
-  <img src="https://img.shields.io/badge/license-MIT-blue?style=for-the-badge" alt="License">
-  <img src="https://img.shields.io/github/languages/code-size/NOTz00m/ClipboardManager?style=for-the-badge" alt="Code Size">
-</div>
-<br>
-A modern, feature-rich clipboard manager built with Python and PySide6, designed to make your copy-paste workflow smoother with smart code detection, and powerful search capabilities. Perfect for developers who want quick access to their clipboard history with style!
+
+A lightweight desktop clipboard manager for Windows focused on speed, privacy, and clean developer workflows. Captures text and code clips in the background, encrypts data at rest, and provides instant searching and language detection.
 
 ## Features
-- Modern UI with dark and light mode
-- Smart code detection with advanced search filters
-- Google Drive sync for cross-device access
-- Built-in encryption for data security
-- Extensible plugin system
-- System tray integration with smart notifications
+
+- **Smart Deduplication**: Re-copying existing text moves it to the top of your history rather than creating duplicate rows, keeping your pins, stars, and tags attached.
+- **Syntax-Based Content Detection**: Classifies code vs. text using syntax scoring for 15+ languages (Python, JS, C++, Rust, Go, SQL, JSON, etc.) and links instead of plain keyword matching.
+- **Native Windows Hotkeys**: Uses native Win32 `RegisterHotKey` for zero-lag global toggle (`Ctrl+Alt+V` by default) without needing admin privileges.
+- **Encryption at Rest**: Encrypts clipboard payloads locally using Fernet and salted PBKDF2. Encryption keys stay stored safely alongside your database.
+- **Snippets & Tagging**: Save code clips as permanent snippets, tag items with custom colored chips, filter by language or type, and search through past clipboard history.
+- **System Tray & Themes**: Minimizes to the system tray, supports dark/light/system themes, optional auto-start on boot, regex notifications, and opt-in Google Drive sync.
 
 ## Requirements
-```
-python >= 3.6
-PySide6
-cryptography
-google-auth-oauthlib
-google-api-python-client
-```
 
-## Installation
-```sh
-git clone https://github.com/NOTz00m/ClipboardManager.git
-cd ClipboardManager
+- **Python**: 3.11 or higher
+- **OS**: Windows 10 or 11 (for native Win32 global hotkeys)
+
+## Setup & Running
+
+Install dependencies:
+
+```powershell
 pip install -r requirements.txt
 ```
 
-## Usage
-```sh
+Run from source:
+
+```powershell
 python main.py
 ```
-On first launch, our friendly setup wizard will help you configure everything just the way you like it!
 
-## Building the Executable
+On first run, a setup wizard configures your theme, encryption, retention policy, and startup options.
 
-### Windows
-```sh
-# Create a single executable with all features
-pyinstaller ClipboardManager.spec
+## Shortcuts & Controls
+
+- **`Ctrl+Alt+V`**: Toggle window visibility from anywhere.
+- **Window Close `[X]`**: Hides window to system tray while clipboard tracking remains active.
+- **Tray Menu**: Right-click system tray icon -> **Exit** to shut down completely.
+
+## Building Executable (.exe)
+
+Build a standalone executable using the included PyInstaller spec:
+
+```powershell
+pip install pyinstaller
+pyinstaller --clean ClipboardManager.spec
 ```
 
-### macOS
-```sh
-# For macOS, use ':' instead of ';' in the --add-data paths
-pyinstaller --name "ClipboardManager" --windowed --icon=clipboard.png --add-data "JetBrainsMono-Regular.ttf:." --add-data "clipboard.png:." --add-data "pin.png:." --add-data "pin_active.png:." --add-data "star.png:." --add-data "star_active.png:." --add-data "trash.png:." --hidden-import PySide6 --hidden-import cryptography --hidden-import cryptography.fernet --hidden-import google.auth.transport.requests --hidden-import google.oauth2.credentials --hidden-import google_auth_oauthlib.flow --hidden-import googleapiclient.discovery main.py
+The output binary will be created in `dist/ClipboardManager.exe`.
+
+> Note: To regenerate multi-resolution icon assets (`clipboard_manager.ico` and `clipboard.png`), run `python tools/generate_icons.py`.
+
+## Running Tests
+
+```powershell
+python -m unittest discover -s tests -v
 ```
-
-### Linux
-```sh
-# For Linux, use ':' instead of ';' in the --add-data paths (same as macOS)
-pyinstaller ClipboardManager.spec
-```
-
-The executable will be created in the `dist` directory. For the best experience, we recommend using the spec file method as it includes all necessary dependencies and resources.
-
-## Future Plans
-- Mobile companion app
-- Real-time sync across devices
-- Custom themes support
-- Custom keyboard shortcuts configuration
-- Usage statistics and insights
-- End-to-end encryption for cloud sync
 
 ## Known Issues
-None at the moment! The recent update fixed the dark theme and scrollbar issues. If you find any bugs, please report them in the Issues section.
+
+- **Global Hotkey Conflicts**: If `Ctrl+Alt+V` (or your configured shortcut) is already registered by another application or Windows utility, registration will fail. A tray warning will pop up so you can bind a different shortcut in Settings.
+- **Concurrent Clipboard Apps**: Running multiple clipboard managers simultaneously (such as Windows Clipboard `Win+V`) may occasionally cause win32 clipboard lock retries.
 
 ## Contributing
-Love Clipboard Manager? We'd love your help! Whether it's reporting bugs, suggesting features, or contributing code - all contributions are welcome. Check out our issues page to get started!
+
+Contributions, bug reports, and feature requests are welcome!
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/my-feature`)
+3. Commit your changes (`git commit -m 'Add new feature'`)
+4. Push to the branch (`git push origin feature/my-feature`)
+5. Open a Pull Request
+
+Feel free to open an issue if you discover a bug or have ideas for improvements.
+
+## License
+
+Distributed under the **MIT NON-AI License**. See [LICENSE](LICENSE) for details.

@@ -131,11 +131,13 @@ QTabBar::tab:!selected {
 
 JETBRAINS_FONT = None
 
+
 def get_icon_path(icon_name):
     if getattr(sys, 'frozen', False):
         return os.path.join(sys._MEIPASS, icon_name)
     else:
         return os.path.join(os.path.dirname(os.path.abspath(__file__)), icon_name)
+
 
 def get_jetbrains_font(size=10):
     global JETBRAINS_FONT
@@ -143,7 +145,10 @@ def get_jetbrains_font(size=10):
         if getattr(sys, 'frozen', False):
             font_path = os.path.join(sys._MEIPASS, "JetBrainsMono-Regular.ttf")
         else:
-            font_path = "JetBrainsMono-Regular.ttf"
+            font_path = os.path.join(
+                os.path.dirname(os.path.abspath(__file__)),
+                "JetBrainsMono-Regular.ttf",
+            )
         font_id = QFontDatabase.addApplicationFont(font_path)
         if font_id == -1:
             print("failed to load jetbrainsmono font.")
@@ -157,6 +162,7 @@ def get_jetbrains_font(size=10):
                 print("jetbrainsmono not found, falling back to monospace")
     return JETBRAINS_FONT
 
+
 def get_app_font(size=10, settings=None):
     custom_font_path = settings.get("custom_font_path") if settings else None
     if custom_font_path and os.path.exists(custom_font_path):
@@ -166,6 +172,7 @@ def get_app_font(size=10, settings=None):
             if families:
                 return QFont(families[0], size)
     return get_jetbrains_font(size)
+
 
 def get_system_theme():
     if platform.system() == "Windows":
@@ -204,119 +211,39 @@ def get_system_theme():
     else:
         return "light"
 
-####### below was made with help from chatgpt, i wasn't sure how to do it myself
 
-def is_code(text):
-    if not text or "\n" not in text:
-        return 0
+def format_relative_time(timestamp_str):
+    # format timestamp into human readable relative string
+    try:
+        from datetime import datetime
+        ts = datetime.strptime(timestamp_str, "%Y-%m-%d %H:%M:%S")
+        now = datetime.now()
+        diff = now - ts
+        seconds = int(diff.total_seconds())
+        if seconds < 0:
+            return "just now"
+        if seconds < 60:
+            return f"{seconds}s ago"
+        minutes = seconds // 60
+        if minutes < 60:
+            return f"{minutes}m ago"
+        hours = minutes // 60
+        if hours < 24:
+            return f"{hours}h ago"
+        days = hours // 24
+        if days < 30:
+            return f"{days}d ago"
+        months = days // 30
+        if months < 12:
+            return f"{months}mo ago"
+        years = days // 365
+        return f"{years}y ago"
+    except Exception:
+        return timestamp_str
 
-    # Common programming language keywords and patterns
-    patterns = {
-        'python': [
-            r'\b(?:def|class|import|from|return|if|elif|else|for|while|try|except|with|lambda|async|await|raise|pass|break|continue|yield|global|nonlocal)\b',
-            r'#.*$',  # Python comments
-            r'"""[\s\S]*?"""',  # Python docstrings
-            r"'''[\s\S]*?'''",  # Python docstrings
-            r'\b(?:True|False|None)\b',  # Python constants
-            r'@\w+',  # Python decorators
-        ],
-        'javascript': [
-            r'\b(?:function|var|let|const|=>|return|if|else|for|while|try|catch|throw|class|extends|new|this|super|import|export|default)\b',
-            r'//.*$',  # JS single-line comments
-            r'/\*[\s\S]*?\*/',  # JS multi-line comments
-            r'\b(?:true|false|null|undefined)\b',  # JS constants
-            r'`[\s\S]*?`',  # Template literals
-        ],
-        'java': [
-            r'\b(?:public|private|protected|static|void|int|float|double|String|boolean|class|interface|extends|implements|new|this|super|import|package)\b',
-            r'//.*$',  # Java single-line comments
-            r'/\*[\s\S]*?\*/',  # Java multi-line comments
-            r'@\w+',  # Java annotations
-        ],
-        'cpp': [
-            r'#include\s*[<"].+[>"]',
-            r'\b(?:class|struct|namespace|template|public|private|protected|virtual|inline|const|static|extern|typedef|using|enum|union)\b',
-            r'//.*$',  # C++ single-line comments
-            r'/\*[\s\S]*?\*/',  # C++ multi-line comments
-            r'::\w+',  # Scope resolution
-        ],
-        'php': [
-            r'<\?php',
-            r'\b(?:function|class|namespace|use|public|private|protected|static|const|echo|print|return|if|else|for|while|foreach|try|catch|throw)\b',
-            r'//.*$',  # PHP single-line comments
-            r'#.*$',  # PHP alternative comments
-            r'/\*[\s\S]*?\*/',  # PHP multi-line comments
-        ],
-        'ruby': [
-            r'\b(?:def|class|module|require|include|attr_accessor|attr_reader|attr_writer|private|public|protected|return|if|else|elsif|unless|case|when|while|until|for|begin|rescue|ensure|yield|super|self)\b',
-            r'#.*$',  # Ruby comments
-            r':\w+',  # Ruby symbols
-        ],
-        'rust': [
-            r'\b(?:fn|let|mut|pub|struct|enum|trait|impl|mod|use|crate|extern|static|const|type|unsafe|async|await|return|if|else|match|loop|while|for|break|continue|move)\b',
-            r'//.*$',  # Rust single-line comments
-            r'/\*[\s\S]*?\*/',  # Rust multi-line comments
-            r'![\w!]+',  # Rust macros
-        ],
-        'go': [
-            r'\b(?:func|type|struct|interface|import|package|const|var|map|chan|go|defer|return|if|else|for|range|switch|case|default|select|break|continue|fallthrough|goto)\b',
-            r'//.*$',  # Go single-line comments
-            r'/\*[\s\S]*?\*/',  # Go multi-line comments
-        ],
-        'sql': [
-            r'\b(?:SELECT|INSERT|UPDATE|DELETE|FROM|WHERE|JOIN|LEFT|RIGHT|INNER|OUTER|GROUP BY|ORDER BY|HAVING|UNION|CREATE|ALTER|DROP|TABLE|INDEX|VIEW|TRIGGER|PROCEDURE|FUNCTION)\b',
-            r'--.*$',  # SQL single-line comments
-            r'/\*[\s\S]*?\*/',  # SQL multi-line comments
-        ],
-        'html': [
-            r'<[^>]+>',  # HTML tags
-            r'<!DOCTYPE\s+html>',
-            r'<!--[\s\S]*?-->',  # HTML comments
-        ],
-        'css': [
-            r'{[^}]*}',  # CSS rules
-            r'@media\s+[^{]+{',
-            r'@keyframes\s+\w+\s*{',
-            r'/\*[\s\S]*?\*/',  # CSS comments
-        ],
-        'shell': [
-            r'^\s*\$\s*',  # Shell commands
-            r'\b(?:if|then|else|fi|for|while|do|done|case|esac|function|export|source|alias|cd|ls|grep|sed|awk|cat|echo|mkdir|rm|cp|mv)\b',
-            r'#.*$',  # Shell comments
-        ],
-    }
 
-    # Additional heuristics
-    code_indicators = [
-        r'[{}]',  # Braces
-        r'[;]',   # Semicolons
-        r'[=+\-*/%&|^<>!]=?',  # Operators
-        r'\b\d+\b',  # Numbers
-        r'["\']',  # Quotes
-        r'\b(?:true|false|null|undefined)\b',  # Common constants
-        r'\b(?:if|else|for|while|return|function|class)\b',  # Common keywords
-    ]
-
-    # Check for language-specific patterns
-    for language, language_patterns in patterns.items():
-        for pattern in language_patterns:
-            if re.search(pattern, text, re.MULTILINE):
-                return 1
-
-    # Check for general code indicators
-    indicator_count = 0
-    for indicator in code_indicators:
-        if re.search(indicator, text):
-            indicator_count += 1
-
-    # If we have multiple code indicators, it's likely code
-    if indicator_count >= 3:
-        return 1
-
-    # Check for indentation patterns (common in code)
-    lines = text.split('\n')
-    indented_lines = sum(1 for line in lines if line.startswith(('    ', '\t')))
-    if indented_lines / len(lines) > 0.3:  # If more than 30% of lines are indented
-        return 1
-
-    return 0 
+from content_detection import (
+    detect_content_type as detect_content_type,
+    detect_language as detect_language,
+    is_code as is_code,
+)

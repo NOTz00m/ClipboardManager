@@ -1,0 +1,33 @@
+# Python / Bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments & Caches
+.pytest_cache/
+.ruff_cache/
+.venv/
+venv/
+ENV/
+env/
+
+# Build & Dist
+build/
+dist/
+*.spec.bak
+
+# App Data, Local DBs & Private Keys (NEVER ship to GitHub)
+*.db
+*.key
+*.pickle
+*.lock
+credentials.json
+settings.json
+temp_sync.json
+*.log
+
+# IDE & Tooling
+.agents/
+.vscode/
+.idea/
+*.swp

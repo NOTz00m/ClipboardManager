@@ -1,6 +1,10 @@
 # -*- mode: python ; coding: utf-8 -*-
+from PyInstaller.utils.hooks import collect_data_files
 
 block_cipher = None
+
+# Collect qfluentwidgets bundled resources (icons, QSS, fonts)
+qfw_datas = collect_data_files('qfluentwidgets')
 
 a = Analysis(
     ['main.py'],
@@ -9,18 +13,22 @@ a = Analysis(
     datas=[
         ('JetBrainsMono-Regular.ttf', '.'),
         ('clipboard.png', '.'),
-        ('pin.png', '.'),
-        ('pin_active.png', '.'),
-        ('star.png', '.'),
-        ('star_active.png', '.'),
-        ('trash.png', '.')
-    ],
+        ('clipboard_manager.ico', '.'),
+    ] + qfw_datas,
     hiddenimports=[
         'PySide6.QtCore',
         'PySide6.QtGui',
         'PySide6.QtWidgets',
+        'qfluentwidgets',
+        'qfluentwidgets.common',
+        'qfluentwidgets.components',
+        'qfluentwidgets.window',
         'cryptography',
         'cryptography.fernet',
+        'content_detection',
+        'hotkeys',
+        'shortcut_parser',
+        'keyboard',
         'google.auth.transport.requests',
         'google.oauth2.credentials',
         'google_auth_oauthlib.flow',
@@ -59,5 +67,5 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon='clipboard.png'
-) 
+    icon='clipboard_manager.ico'
+)
